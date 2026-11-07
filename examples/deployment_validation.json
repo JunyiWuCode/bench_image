@@ -1,0 +1,44 @@
+{
+  "integration_release": "v0.1.2",
+  "benchmark_commit": "df2f2e83fcbb40a8c03eed0e3dee4ae6a52d7dd8",
+  "far_commit_prefix": "b879cb1f",
+  "cluster": "Draco",
+  "clean_far_clone_and_controller_install": true,
+  "installed_package_and_worker_source_checks": true,
+  "isolated_interpreter_imports": 12,
+  "python_minor_versions": ["3.10", "3.11", "3.12"],
+  "controller_dependencies_exposed_to_workers": false,
+  "unit_tests_passed": 16,
+  "training_prompt_config_tests_passed": 2,
+  "installed_cvtg_gpu_replay": {
+    "images": 2,
+    "gpus": 1,
+    "metrics": {
+      "CVTG WA": 50.0,
+      "CVTG NED": 85.11906986958107,
+      "CVTG CLIP": 81.5185546875
+    },
+    "maximum_absolute_difference_from_reference": 0.0
+  },
+  "public_reference_zip": {
+    "images": 106,
+    "downloaded_from_public_versioned_url": true,
+    "all_restored_rgb_pixels_identical": true
+  },
+  "fresh_geneval_asset_download": {
+    "official_original_weight": true,
+    "native_checkpoint_filename": "mask2former_swin-s-p4-w7-224_lsj_8x2_50e_coco.pth",
+    "bytes": 275630991
+  },
+  "full_reference_metric_replay": {
+    "columns": 14,
+    "images": 106,
+    "maximum_absolute_difference_between_final_independent_passes": 0.0,
+    "details": "validation.json"
+  },
+  "limitations": [
+    "Existing isolated GPU ML environments and official scorer weight caches were reused read-only; all twelve ML environments were not rebuilt from scratch.",
+    "These are diagnostic subset and deployment checks, not new full-suite model-quality measurements.",
+    "TIIF fixture replay uses the documented deterministic offline mode; full-suite native stochastic scoring is unchanged."
+  ]
+}

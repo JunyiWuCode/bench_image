@@ -334,6 +334,14 @@ prompts, but only one expansion matched the older cache exactly; this is why
 cross-model comparisons must reuse the same frozen captions. Neither this
 native smoke nor the fixed-image table is a newly generated full-suite score.
 
+The **v0.1.2 installed deployment** was additionally checked from a clean FAR
+clone: all 12 worker interpreters imported their own dependencies correctly
+across Python 3.10/3.11/3.12, and an installed-package single-GPU CVTG replay
+matched all three reference metrics exactly. Public ZIP download/pixel checks
+and a fresh official GenEval checkpoint download also passed. See
+[`deployment_validation.json`](examples/deployment_validation.json) for scope
+and limitations; this does not claim a cold rebuild of all ML environments.
+
 ### Historical full-suite measurements (not the ZIP subset)
 
 These are previously completed runs of the same 33,468-image English protocol
