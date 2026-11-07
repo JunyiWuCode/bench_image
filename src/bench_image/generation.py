@@ -7,6 +7,13 @@ import uuid
 from .protocols import read_jsonl, validate_records, write_jsonl, output_path_for_record
 
 
+def _native_backend(class_name,transformer_config):
+    if class_name=='Flux1FourStepPipeline':
+        return 'flux1-global-readout' if transformer_config.get('num_horizon_basis')==128 else 'flux1-raw2q'
+    if class_name=='Flux3FourStepPipeline':return 'flux3-raw2q'
+    raise ValueError(f'Unsupported native export {class_name}; do not substitute an ordinary pipeline for an interval model')
+
+
 def _lock(path,value):
     """Publish one immutable config atomically, including concurrent array jobs."""
     path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
@@ -45,11 +52,12 @@ def generate(records,output_dir,model,*,revision=None,steps=4,guidance=None,
         revision=model_info(model,revision=revision).sha
         index=Path(hf_hub_download(model,'model_index.json',revision=revision))
     class_name=json.loads(index.read_text())['_class_name']
-    backend={'Flux1FourStepPipeline':'flux1-raw2q','Flux3FourStepPipeline':'flux3-raw2q'}.get(class_name)
-    if backend is None:
-        raise ValueError(f'Unsupported native export {class_name}; do not substitute an ordinary pipeline for an interval model')
+    transformer_path=index.parent/'transformer/config.json' if local.is_dir() else Path(hf_hub_download(model,'transformer/config.json',revision=revision))
+    transformer_config=json.loads(transformer_path.read_text())
+    backend=_native_backend(class_name,transformer_config)
+    flux1=class_name=='Flux1FourStepPipeline'
     if not trust_remote_code:raise ValueError('Review the model code and explicitly enable --trust-remote-code')
-    native_guidance=3.5 if backend=='flux1-raw2q' else 1.0
+    native_guidance=3.5 if flux1 else 1.0
     if steps!=4 or (guidance is not None and guidance!=native_guidance):
         raise ValueError(f'{backend} requires four steps and native guidance {native_guidance}')
     captions={}
@@ -58,7 +66,7 @@ def generate(records,output_dir,model,*,revision=None,steps=4,guidance=None,
             if row['prompt'] in captions and captions[row['prompt']]!=row['caption']:
                 raise ValueError('Conflicting cached PUP captions')
             captions[row['prompt']]=row['caption']
-    if backend=='flux1-raw2q' and captions:
+    if flux1 and captions:
         raise ValueError('FLUX.1 Raw2Q uses native raw prompts, not FLUX.3 PUP')
     if backend=='flux3-raw2q' and not captions and not allow_raw_flux3:
         raise ValueError('FLUX.3 comparison requires --prompt-map (or explicit --allow-raw-flux3 ablation)')
@@ -68,6 +76,8 @@ def generate(records,output_dir,model,*,revision=None,steps=4,guidance=None,
                 prompt_mode='cached_official_pup' if captions else 'native_raw',
                 seed_rule='record.seed, otherwise 1000*prompt_index+sample_index',
                 num_shards=num_shards,model_dtype='bfloat16',vae_dtype='float32')
+    if backend=='flux1-global-readout':
+        config['parameterization']='native single-time backbone with 128 integrated global readouts'
     _lock(root/'generation_config.json',config)
     # The CLI normally creates this before submitting an array. Exclusive publication
     # also makes direct API calls safe when many shards start simultaneously.
@@ -109,15 +119,15 @@ def generate(records,output_dir,model,*,revision=None,steps=4,guidance=None,
     scale=float(pipe.scheduler.config.final_step_size_scale)
     if scale!=.3:raise ValueError('Unexpected Raw2Q final interval scale')
     shift=float(pipe.scheduler.config.shift)
-    expected_shift=3.158192909689767 if backend=='flux1-raw2q' else 6.93
+    expected_shift=3.158192909689767 if flux1 else 6.93
     if shift!=expected_shift:raise ValueError(f'Unexpected native scheduler shift: {shift}')
     raw_times=pipe.scheduler.get_raw_timesteps(4,torch.device('cuda'))
     times=pipe.scheduler.apply_shift(raw_times)
     trace=dict(final_step_size_scale=scale,scheduler_shift=shift,
         raw_times=raw_times.cpu().tolist(),shifted_times=times.cpu().tolist(),
         model_dtype='bfloat16',vae_dtype='float32',integration_dtype='float32',
-        noise_generator_device='cpu',noise_layout='BCHW' if backend=='flux1-raw2q' else 'packed_token_major',
-        noise_dtype='bfloat16' if backend=='flux1-raw2q' else 'float32_rounded_to_bfloat16')
+        noise_generator_device='cpu',noise_layout='BCHW' if flux1 else 'packed_token_major',
+        noise_dtype='bfloat16' if flux1 else 'float32_rounded_to_bfloat16')
     calls=[0]
     hook=pipe.transformer.register_forward_pre_hook(lambda *_:calls.__setitem__(0,calls[0]+1))
     started=time.perf_counter();manifest.parent.mkdir(parents=True,exist_ok=True)

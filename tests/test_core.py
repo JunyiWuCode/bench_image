@@ -8,7 +8,7 @@ from unittest.mock import patch
 import zipfile
 
 from bench_image.protocols import BENCHMARKS,FIELDS,validate_records,generation_samples
-from bench_image.generation import _lock
+from bench_image.generation import _lock,_native_backend
 from bench_image.scoring import _device_tokens,_snapshot_runner,_compatible_configuration
 from bench_image.fixtures import extract_example,verify_reference
 from bench_image.setup import environment_plan
@@ -17,6 +17,10 @@ from PIL import Image,ImageChops
 
 
 class CoreTests(unittest.TestCase):
+    def test_global_readout_is_not_mislabeled_as_raw2q(self):
+        self.assertEqual(_native_backend('Flux1FourStepPipeline',{'num_horizon_basis':128}),'flux1-global-readout')
+        self.assertEqual(_native_backend('Flux1FourStepPipeline',{'gate_value':.25}),'flux1-raw2q')
+        with self.assertRaises(ValueError):_native_backend('FluxPipeline',{})
     def test_runtime_asset_additions_do_not_hide_changed_assets(self):
         base=dict(model_name='test',assets={'judge':'original'})
         self.assertTrue(_compatible_configuration(base,dict(model_name='test',assets={'judge':'original','new_scorer':'weights'})))

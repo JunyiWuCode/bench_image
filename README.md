@@ -156,6 +156,10 @@ The included generation adapter supports the published **native custom
 `Flux1FourStepPipeline` and `Flux3FourStepPipeline` exports**. Other models
 can use the API above. Unknown pipeline classes are rejected; ordinary FLUX
 sampling is never substituted for an interval-conditioned FlowMap update.
+The branch's newer FLUX.1 128-basis global-readout export shares the native
+four-step pipeline contract; its configuration is recorded separately as
+`flux1-global-readout`, not mislabeled Raw2Q. The pixel-parity GPU tests below
+cover the two specified Raw2Q reference exports, not that newer checkpoint.
 
 | Export family | Steps / actual NFE | Guidance | Shift | Last interval scale | Prompt |
 | --- | --- | ---: | ---: | ---: | --- |
