@@ -1,0 +1,11 @@
+__pycache__/
+*.egg-info/
+.venv/
+.cache/
+build/
+dist/
+runs/
+runtime.local.json
+*.log
+validation_runs/
+validation/runtime.local.json

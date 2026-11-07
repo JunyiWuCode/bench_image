@@ -1,0 +1,18 @@
+bench_image
+Copyright 2026 JunyiWuCode and contributors.
+
+The integration adapters under src/bench_image/_legacy and selected runtime
+helpers originate from the Apache-2.0 benchmark_image/FAR-Dev integration.
+Exact import provenance is in src/bench_image/data/provenance.json.
+
+The API and fixed-image replay workflow are inspired by
+https://github.com/Orannue/Anyflow_T2VA_Bench (no video benchmark is included).
+
+Benchmark code, datasets, pretrained scorers and generated-image model terms
+remain governed by their upstream licenses. This repository's Apache-2.0
+license does not relicense those assets. Setup downloads official sources and
+weights separately; no model weights are bundled. The example ZIP contains
+generated images and selected prompts to replay the documented diagnostic
+evaluation. Consult upstream dataset terms before redistribution/downstream
+use. Source URLs and revisions are in src/bench_image/data/resources.json and
+the packaged source lock.

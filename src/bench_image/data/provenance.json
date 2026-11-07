@@ -1,0 +1,7 @@
+{
+  "origin": "JunyiWuCode/benchmark_image (Apache-2.0) and FAR-Dev benchmark integration",
+  "benchmark_revision": "b8159ebc84ca2197fd5072fe957c9621ad6a5efe",
+  "project_revision": "d1453ab977b3678297ecba9ee2a8aa8c6078431f",
+  "source": "Previously validated 33468-image English open benchmark suite; local adapter corrections retained",
+  "note": "Upstream dataset and model licenses remain separate. No weights are included."
+}

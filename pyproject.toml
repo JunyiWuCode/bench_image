@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bench-image"
+version = "0.1.0"
+description = "Source-pinned image benchmarks and native AnyFlow2 FLUX generation"
+requires-python = ">=3.10"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+dependencies = ["Pillow>=10", "pandas>=2,<3", "pyarrow>=14", "huggingface-hub>=0.34", "PyYAML>=6"]
+
+[project.scripts]
+bench-image = "bench_image.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+bench_image = ["data/*.json", "_legacy/assets/**/*.json", "_legacy/assets/**/*.jsonl", "runtime/scripts/*.sh", "runtime/scripts/*.py"]

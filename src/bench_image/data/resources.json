@@ -1,0 +1,47 @@
+{
+  "git": {
+    "geneval": ["https://github.com/djghosh13/geneval.git", "af4902f24d3ca90ebbb446dd9891a59e0f82725f"],
+    "geneval2": ["https://github.com/facebookresearch/GenEval2.git", "a6e82d2289e8d418f27f0adee77908b07060eea3"],
+    "dpgbench": ["https://github.com/Tencent-Hunyuan/GEAR.git", "bf9665806e3c3666580467a42c8b04f56e4a33c8"],
+    "tiif": ["https://github.com/A113N-W3I/TIIF-Bench.git", "cca586f40f057c1590d819ae3807ea4e27620e84"],
+    "longtext_en": ["https://github.com/X-Omni-Team/X-Omni.git", "2b8237bb3789638c290eeda3e83ed81bd3652c3b"],
+    "oneig_en": ["https://github.com/OneIG-Bench/OneIG-Benchmark.git", "41b49831e79e6dde5323618c164da1c4cf0f699d"],
+    "hpsv3_scorer": ["https://github.com/MizzenAI/HPSv3.git", "bd0c5fcb5f587617b0169c07222ab78d01e2f3c2"],
+    "wise_verified": ["https://github.com/PKU-YuanGroup/WISE.git", "09b5539d64681bf11102fc5c87e63a387beaf71d"],
+    "qwen_image_bench": ["https://github.com/QwenLM/Qwen-Image-Bench.git", "8ab1fb47df2fba7b0cb046770a87f6323b98ecfc"],
+    "mmdetection": ["https://github.com/open-mmlab/mmdetection.git", "e9cae2d0787cd5c2fc6165a6061f92fa09e48fb1"]
+  },
+  "huggingface": {
+    "GENEVAL2_MODEL": {"repo": "Qwen/Qwen3-VL-8B-Instruct", "revision": "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b"},
+    "TIIF_MODEL": {"repo": "Qwen/Qwen2.5-VL-72B-Instruct", "revision": "89c86200743eec961a297729e7990e8f2ddbc4c5"},
+    "ONEIG_QWEN_MODEL": {"repo": "Qwen/Qwen2.5-VL-7B-Instruct", "revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5"},
+    "ONEIG_LLM2CLIP_MODEL": {"repo": "microsoft/LLM2CLIP-Openai-L-14-336", "revision": "92512331f393a003c3d98404677f991c188162c9"},
+    "ONEIG_LLM2CLIP_LLM": {"repo": "microsoft/LLM2CLIP-Llama-3-8B-Instruct-CC-Finetuned", "revision": "97f7d164a1eb89a79e344b21c7a1be7eee265d2e"},
+    "ONEIG_LLM2VEC_CODE": {"repo": "McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp", "revision": "31474e395ada192e8ed1586db6be79fb3b70c9c0", "file": "modeling_llama_encoder.py"},
+    "ONEIG_CLIP_MODEL": {"repo": "openai/clip-vit-large-patch14-336", "revision": "ce19dc912ca5cd21c8a653c79e251e808ccabcd1"},
+    "ONEIG_STYLE_MODEL": {"repo": "xingpng/OneIG-StyleEncoder", "revision": "9e8104621cbc8c8f04ce663639ffbec63e0a9693"},
+    "QJUDGER_MODEL": {"repo": "Qwen/Qwen-Image-Bench", "revision": "1b77ff83564ac4e4e8140769eacff7ff73f35f3c"},
+    "HPSV3_BASE_MODEL": {"repo": "Qwen/Qwen2-VL-7B-Instruct", "revision": "eed13092ef92e448dd6875b2a00151bd3f7db0ac"},
+    "HPSV3_CHECKPOINT": {"repo": "MizzenAI/HPSv3", "revision": "4f81e3e09edd82fe3c5f636444c721b592a735ca", "file": "HPSv3.safetensors"},
+    "WISE_MODEL": {"repo": "Qwen/Qwen3.5-35B-A3B", "revision": "59d61f3ce65a6d9863b86d2e96597125219dc754"},
+    "PADDLEOCR_DET_MODEL_DIR": {"repo": "PaddlePaddle/PP-OCRv5_server_det", "revision": "ca867c897ecbca8873081573a802ad70d499cb94"},
+    "PADDLEOCR_REC_MODEL_DIR": {"repo": "PaddlePaddle/en_PP-OCRv5_mobile_rec", "revision": "267c36e24c331595590fe7bd72bde2436fd286f2"}
+  },
+  "optional_huggingface": {
+    "FLUX3_PUP_MODEL": {"repo": "black-forest-labs/flux-3-image-klein-pup", "revision": "3f3edb52b2c55de0d49feab28598b68f7f8e4830"}
+  },
+  "datasets": {
+    "dpgbench_questions": {"repo": "Jialuo21/DPG-Bench", "revision": "16ab39cdc630e51072efaeeec24c16b2bb39a849", "file": "data/test-00000-of-00001.parquet"},
+    "hpsv3_official": {"repo": "MizzenAI/HPDv3", "revision": "5ac4b5b5f2ef42c4613dec612473170b131552db", "allow_patterns": ["benchmark/*.json"]}
+  },
+  "http": {
+    "GENEVAL_MODEL_PATH": {"url": "https://download.openmmlab.com/mmdetection/v2.0/mask2former/mask2former_swin-s-p4-w7-224_lsj_8x2_50e_coco/mask2former_swin-s-p4-w7-224_lsj_8x2_50e_coco_20220504_001756-743b7d99.pth", "file": "mask2former/mask2former_swin-s-p4-w7-224_lsj_8x2_50e_coco_20220504_001756-743b7d99.pth", "return_directory": true},
+    "BENCH_CLIP_MODEL_PATH": {"url": "https://openaipublic.azureedge.net/clip/models/b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836/ViT-L-14.pt", "file": "clip/ViT-L-14.pt"}
+  },
+  "modelscope": {
+    "DPGBENCH_MPLUG_MODEL": {"repo": "damo/mplug_visual-question-answering_coco_large_en", "revision": "master", "note": "Official legacy ModelScope distribution has no immutable revision recorded by the original evaluation. Download receipts retain upstream metadata; do not claim a content-addressed lock."}
+  },
+  "google_drive": {
+    "ONEIG_CSD_MODEL": {"id": "1FX0xs8p-C7Ob-h5Y4cUhTeOepHzXv_46", "file": "oneig_csd/checkpoint.pth", "note": "Original OneIG README download; upstream exposes a file ID, not an immutable model revision."}
+  }
+}
