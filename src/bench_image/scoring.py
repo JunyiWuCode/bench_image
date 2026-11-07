@@ -183,8 +183,10 @@ def evaluate(root,runtime,*,benchmarks=None,devices='0',model_name='model',force
         current_config=dict(config,world_size=len(chosen))
         output=root/'scoring'/name;output.mkdir(parents=True,exist_ok=True)
         marker=output/'complete.json'
+        protocol='tiif_fixture_offline_v1' if partial and name=='tiif_short' else 'native_v1'
         if marker.exists():
             old=_read(marker)
+            if old.get('protocol','native_v1')!=protocol:raise ValueError('Cached scorer used another protocol; use a fresh output directory')
             if not _compatible_configuration(old['configuration'],current_config):raise ValueError(f'Cached {name} used a different runtime; use a new output directory')
             if not force:continue
             raise ValueError('--force cannot overwrite scoring evidence; use a fresh run directory')
@@ -197,7 +199,7 @@ def evaluate(root,runtime,*,benchmarks=None,devices='0',model_name='model',force
             _run(['bash',_snapshot_runner(output),'smoke' if partial else 'full',
                   name,root,source],local,output/'logs/runner.log')
         this_metrics,_=collect_metrics(root,records,('tiif_short','tiif_long') if name=='tiif_short' else (name,))
-        _atomic_json(marker,dict(complete=True,configuration=current_config,metrics=this_metrics,
+        _atomic_json(marker,dict(complete=True,configuration=current_config,metrics=this_metrics,protocol=protocol,
                          elapsed_seconds=time.perf_counter()-started))
     available=[]
     for name in BENCHMARKS:

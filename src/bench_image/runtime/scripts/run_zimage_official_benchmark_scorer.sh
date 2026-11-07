@@ -198,6 +198,18 @@ PY
     TIIF_EXPECTED_RESULTS=$((2 * EXPECTED_COUNT))
     TIIF_EXISTING_RESULTS=$(find "$TIIF_RAW_ROOT" -type f -name '*.json' 2>/dev/null | wc -l)
     if ((TIIF_EXISTING_RESULTS != TIIF_EXPECTED_RESULTS)); then
+      if [[ "$MODE" == smoke ]]; then
+        export VLLM_ENABLE_V1_MULTIPROCESSING=0
+        "$VLLM_PYTHON" "$REPO_ROOT/scripts/run_tiif_parallel_clients.py" \
+          --evaluator "$OUTPUT/eval_with_vlm_pinned.py" \
+          --source-root "$SOURCE_ROOT/tiif" \
+          --image-dir "$LAYOUT/tiif" --output-dir "$OUTPUT/raw" \
+          --sample-indices "$LAYOUT/tiif/sample_indices.json" \
+          --work-dir "$OUTPUT/logs/tiif_clients" \
+          --eval-model "$MODEL_NAME" --base-url http://127.0.0.1/unused \
+          --model Qwen2.5-VL-72B-Instruct --workers 1 \
+          >"$OUTPUT/logs/scorer.log" 2>&1
+      else
       PORT=${TIIF_PORT:-18090}
       "$VLLM_PYTHON" -m vllm.entrypoints.openai.api_server \
         --model "$TIIF_MODEL" --served-model-name Qwen2.5-VL-72B-Instruct \
@@ -224,6 +236,7 @@ PY
       kill "$server_pid" 2>/dev/null || true
       wait "$server_pid" 2>/dev/null || true
       trap - EXIT
+      fi
     else
       echo "TIIF inference already complete: $TIIF_EXISTING_RESULTS/$TIIF_EXPECTED_RESULTS results" \
         >"$OUTPUT/logs/scorer.log"

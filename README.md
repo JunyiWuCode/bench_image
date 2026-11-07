@@ -280,6 +280,15 @@ and a deterministic per-question choice among the same three official templates.
 This applies only to subsets/fixtures. Full-suite TIIF keeps the original
 stochastic protocol; its historical numbers are not overwritten by fixture
 numbers. These two modes must not be mixed in a model-quality comparison.
+Online serving still varied in the seeded temperature-0 test (Short
+50.69/49.58, Long 54.14/51.92). The diagnostic client therefore uses offline
+vLLM with in-process deterministic scheduling, one sequence, eager execution
+and no prefix/chunked-prefill caching, as advised by
+[vLLM's reproducibility documentation](https://docs.vllm.ai/en/v0.19.1/usage/reproducibility/).
+It retains the same Qwen2.5-VL-72B weights, original messages, native parsing
+and aggregation. Full-suite online scoring is unchanged. Failed earlier
+replays remain recorded; neither tolerance nor sample selection is adjusted
+to conceal them.
 
 ### Measured diagnostic reference
 

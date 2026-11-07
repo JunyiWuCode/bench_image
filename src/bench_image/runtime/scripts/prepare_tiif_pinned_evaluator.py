@@ -26,6 +26,8 @@ def main() -> int:
     source=source.replace(UPSTREAM_LOOKUP, PARTIAL_SAFE_LOOKUP)
     if args.deterministic_fixture:
         replacements={
+            'client = openai.OpenAI(':
+                'client = __import__("bench_image.tiif_offline", fromlist=["OfflineClient"]).OfflineClient(',
             'temperature=1.0 # You may set it to 0 if you require stricter reproducibility.':
                 'temperature=0.0, seed=0 # Deterministic diagnostic replay; full protocol keeps upstream temperature=1.',
             'random.choice([raw_prompt, raw_prompt_1, raw_prompt_2])':

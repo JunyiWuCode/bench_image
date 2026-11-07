@@ -122,7 +122,7 @@ class CoreTests(unittest.TestCase):
         for item in plan:self.assertTrue(item['prefix'].startswith(d))
 
     def test_tiif_full_and_diagnostic_modes_are_distinct(self):
-        source='line_indices = sample_idx[attr_type]\ntemperature=1.0 # You may set it to 0 if you require stricter reproducibility.\nprompt_template = random.choice([raw_prompt, raw_prompt_1, raw_prompt_2])\n'
+        source='line_indices = sample_idx[attr_type]\nclient = openai.OpenAI()\ntemperature=1.0 # You may set it to 0 if you require stricter reproducibility.\nprompt_template = random.choice([raw_prompt, raw_prompt_1, raw_prompt_2])\n'
         with tempfile.TemporaryDirectory() as d:
             original=Path(d)/'source.py';full=Path(d)/'full.py';fixture=Path(d)/'fixture.py'
             original.write_text(source)
@@ -133,6 +133,8 @@ class CoreTests(unittest.TestCase):
             self.assertIn('random.choice(',full.read_text())
             self.assertIn('temperature=0.0, seed=0',fixture.read_text())
             self.assertIn('random.Random("fixture-v1:',fixture.read_text())
+            self.assertIn('bench_image.tiif_offline',fixture.read_text())
+            self.assertNotIn('bench_image.tiif_offline',full.read_text())
 
 
 if __name__=='__main__':unittest.main()

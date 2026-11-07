@@ -33,15 +33,18 @@ def main():
         native[backend]=dict(images=receipt['images'],schedule=receipt['native_receipt']['schedule'],
             comparisons=receipt['comparisons'],hardware='NVIDIA A100-SXM4-80GB',
             note='Measured exact pixel equality on this stack, not a cross-platform guarantee')
-    stochastic={}
-    for directory in ('run','repeat'):
-        old=root/directory/'scoring_history/tiif_short_official_stochastic/complete.json'
-        if old.exists():
-            values=json.loads(old.read_text())['metrics']
-            stochastic[directory]={key:100*values[key]['score'] for key in ('tiif_short','tiif_long')}
+    failed_replays={}
+    for experiment in ('tiif_short_official_stochastic','tiif_short_seeded_online'):
+        failed_replays[experiment]={}
+        for directory in ('run','repeat'):
+            old=root/directory/'scoring_history'/experiment/'complete.json'
+            if old.exists():
+                values=json.loads(old.read_text())['metrics']
+                failed_replays[experiment][directory]={key:100*values[key]['score'] for key in ('tiif_short','tiif_long')}
     pup=json.loads((a.pup/'validation.json').read_text())
     if not pup['complete'] or len(pup['comparison'])!=3:raise ValueError('PUP backend smoke incomplete')
-    result=dict(reference=reference,expected=expected,independent_repeat=verified,native_generation=native,
+    result=dict(integration_release='JunyiWuCode/bench_image@v0.1.0',
+        reference=reference,expected=expected,independent_repeat=verified,native_generation=native,
         observed_environments=versions,source_catalog=json.loads((PACKAGE/'data/resources.json').read_text()),
         fresh_controller_install=True,fresh_public_sources=True,
         all_fresh_ml_environments_installed=False,
@@ -50,8 +53,10 @@ def main():
             model='black-forest-labs/flux-3-image-klein-pup',revision='3f3edb52b2c55de0d49feab28598b68f7f8e4830',
             note='Greedy backend succeeds; reuse frozen captions because batch/engine/hardware can change expansions'),
         tiif_diagnostic_protocol=dict(temperature=0,request_seed=0,
+            transport='offline_vllm',deterministic_scheduling=True,max_num_seqs=1,enforce_eager=True,
+            enable_prefix_caching=False,enable_chunked_prefill=False,
             template_choice='deterministic per-question selection among original three templates',
-            full_protocol_unchanged=True,failed_upstream_stochastic_replay=stochastic),
+            full_protocol_unchanged=True,failed_earlier_replays=failed_replays),
         scorer_weights='Explicit existing official caches, reused read-only; see README for mutable legacy distributions',
         model_revisions={'flux1-raw2q':'2bcb04d9948e5d00ddd9972ff0318d62f4a33951',
                          'flux3-raw2q':'781ff93f92b84397ee0e62e02f052bce99549759'},
