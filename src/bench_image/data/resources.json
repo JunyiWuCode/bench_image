@@ -35,7 +35,7 @@
     "hpsv3_official": {"repo": "MizzenAI/HPDv3", "revision": "5ac4b5b5f2ef42c4613dec612473170b131552db", "allow_patterns": ["benchmark/*.json"]}
   },
   "http": {
-    "GENEVAL_MODEL_PATH": {"url": "https://download.openmmlab.com/mmdetection/v2.0/mask2former/mask2former_swin-s-p4-w7-224_lsj_8x2_50e_coco/mask2former_swin-s-p4-w7-224_lsj_8x2_50e_coco_20220504_001756-743b7d99.pth", "file": "mask2former/mask2former_swin-s-p4-w7-224_lsj_8x2_50e_coco_20220504_001756-743b7d99.pth", "return_directory": true},
+    "GENEVAL_MODEL_PATH": {"url": "https://download.openmmlab.com/mmdetection/v2.0/mask2former/mask2former_swin-s-p4-w7-224_lsj_8x2_50e_coco/mask2former_swin-s-p4-w7-224_lsj_8x2_50e_coco_20220504_001756-743b7d99.pth", "file": "mask2former/mask2former_swin-s-p4-w7-224_lsj_8x2_50e_coco.pth", "return_directory": true},
     "BENCH_CLIP_MODEL_PATH": {"url": "https://openaipublic.azureedge.net/clip/models/b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836/ViT-L-14.pt", "file": "clip/ViT-L-14.pt"}
   },
   "modelscope": {

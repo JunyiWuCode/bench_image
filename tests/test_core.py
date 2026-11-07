@@ -15,11 +15,17 @@ from bench_image.generation import _lock,_native_backend
 from bench_image.scoring import _device_tokens,_snapshot_runner,_compatible_configuration
 from bench_image.fixtures import extract_example,verify_reference
 from bench_image.setup import environment_plan
-from bench_image.config import WORKERS,TOOLS
+from bench_image.config import WORKERS,TOOLS,PACKAGE
 from PIL import Image,ImageChops
 
 
 class CoreTests(unittest.TestCase):
+    def test_geneval_download_uses_the_native_checkpoint_filename(self):
+        catalog=json.loads((PACKAGE/'data/resources.json').read_text())
+        resource=catalog['http']['GENEVAL_MODEL_PATH']
+        self.assertTrue(resource['return_directory'])
+        self.assertEqual(Path(resource['file']).name,'mask2former_swin-s-p4-w7-224_lsj_8x2_50e_coco.pth')
+        self.assertIn('20220504_001756-743b7d99.pth',resource['url'])
     def test_global_readout_is_not_mislabeled_as_raw2q(self):
         self.assertEqual(_native_backend('Flux1FourStepPipeline',{'num_horizon_basis':128}),'flux1-global-readout')
         self.assertEqual(_native_backend('Flux1FourStepPipeline',{'gate_value':.25}),'flux1-raw2q')
