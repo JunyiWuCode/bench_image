@@ -15,11 +15,19 @@ from bench_image.generation import _lock,_native_backend
 from bench_image.scoring import _device_tokens,_snapshot_runner,_compatible_configuration
 from bench_image.fixtures import extract_example,verify_reference
 from bench_image.setup import environment_plan
-from bench_image.config import WORKERS,TOOLS,PACKAGE
+from bench_image.config import WORKERS,TOOLS,PACKAGE,python_namespace_root
 from PIL import Image,ImageChops
 
 
 class CoreTests(unittest.TestCase):
+    def test_worker_namespace_does_not_expose_controller_dependencies(self):
+        root=python_namespace_root()
+        self.assertEqual(root,python_namespace_root())
+        self.assertEqual({p.name for p in root.iterdir()},{'bench_image'})
+        self.assertEqual((root/'bench_image').resolve(),PACKAGE)
+        self.assertNotEqual(root,PACKAGE.parent)
+        self.assertFalse((root/'numpy').exists())
+        self.assertFalse((root/'PIL').exists())
     def test_geneval_download_uses_the_native_checkpoint_filename(self):
         catalog=json.loads((PACKAGE/'data/resources.json').read_text())
         resource=catalog['http']['GENEVAL_MODEL_PATH']

@@ -101,9 +101,9 @@ def main(argv=None):
         # The controller and generation interpreter deliberately live in different
         # environments. Make this installed package visible without reinstalling
         # scorer dependencies into the generation environment.
-        from .config import PACKAGE
+        from .config import python_namespace_root
         env=dict(os.environ)
-        env['PYTHONPATH']=str(PACKAGE.parent)+os.pathsep+env.get('PYTHONPATH','')
+        env['PYTHONPATH']=str(python_namespace_root())+os.pathsep+env.get('PYTHONPATH','')
         subprocess.run(command,check=True,env=env)
         if not args.generate_only:
             from .scoring import evaluate,write_summary

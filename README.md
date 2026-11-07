@@ -43,6 +43,10 @@ does **not** claim complete setup. `download --only sources` fetches only code.
 Version **0.1.1** corrects the fresh GenEval download's local filename to the
 name expected by its native evaluator. It does not change model bytes, scoring
 logic or the v0.1.0 reference archive/measurements.
+Version **0.1.2** isolates the installed package's Python namespace during
+interpreter handoff: workers do not inherit the controller's compiled
+NumPy/Pillow dependencies. The reference images and scoring algorithms are
+unchanged.
 
 An existing installation can supply a JSON runtime via `--runtime runtime.local.json`
 (never commit that file). Its keys are `source_root`, `setup_python`, `python`

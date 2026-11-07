@@ -2,10 +2,29 @@
 import json
 import os
 from pathlib import Path
+import tempfile
+import threading
 
 PACKAGE=Path(__file__).resolve().parent
 TOOLS=PACKAGE/'runtime/scripts'
 WORKERS=PACKAGE/'_legacy/workers'
+_IMPORT_CONTEXT=None
+_IMPORT_LOCK=threading.Lock()
+
+
+def python_namespace_root():
+    """Expose only our pure Python namespace, never controller site-packages.
+
+    Scorers use different Python/CUDA ABIs. Prepending the controller's complete
+    site-packages would shadow their own NumPy/Pillow/Transformers installations.
+    This node-local link lives until all synchronous children have finished.
+    """
+    global _IMPORT_CONTEXT
+    with _IMPORT_LOCK:
+        if _IMPORT_CONTEXT is None:
+            _IMPORT_CONTEXT=tempfile.TemporaryDirectory(prefix='bench-image-import-')
+            (Path(_IMPORT_CONTEXT.name)/'bench_image').symlink_to(PACKAGE,target_is_directory=True)
+        return Path(_IMPORT_CONTEXT.name)
 
 
 def cache_root():
@@ -36,5 +55,5 @@ def worker_environment(runtime, *,world_size,model_name):
     env.update(BENCH_REPO_ROOT=str(PACKAGE/'runtime'),BENCH_WORKER_ROOT=str(WORKERS),
                BENCH_SETUP_PYTHON=runtime.get('setup_python',runtime['python']['GENERATION_PYTHON']),
                BENCH_SCORER_WORLD_SIZE=str(world_size),BENCH_EVAL_MODEL_NAME=model_name)
-    env['PYTHONPATH']=str(PACKAGE.parent)+os.pathsep+env.get('PYTHONPATH','')
+    env['PYTHONPATH']=str(python_namespace_root())+os.pathsep+env.get('PYTHONPATH','')
     return env
