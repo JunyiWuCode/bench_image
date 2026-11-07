@@ -66,6 +66,9 @@ this does **not** establish that all 12 fresh worker environment recipes have be
 reinstalled and exercised on every platform. FlashAttention wheels target the
 specified Python/Torch/CUDA ABI. Adjust an explicit runtime for another ABI.
 PaddleOCR remains **3.3.3 / Paddle GPU 3.3.1**, not a downgraded OCR stack.
+The adopted CLIP-only environment also contains unused legacy Paddle packages;
+they never perform OCR here and are not installed by the fresh CLIP recipe.
+The exported environment metadata lists installed packages, not just imports.
 
 Two original upstream distributions are not immutable: mPLUG is served from
 ModelScope `master`, and OneIG CSD from its official Google Drive file ID.
@@ -117,8 +120,10 @@ benchmark's name. In particular:
   `0/1/2/N/A → 0/60/100/excluded`, retaining raw judge responses.
 - WISE uses the original verified prompts (no rewrite) and local open judge.
 
-All headline values below are on a 0–100 scale except HPSv3 (native units).
-Raw component units remain available in per-benchmark summaries.
+Headlines use the historical table's 100× scaling for fractional metrics;
+HPSv3 stays in native units. CVTG CLIP is `100 × 2.5 × max(cosine, 0)`,
+not a bounded accuracy percentage. Raw component units remain available in
+per-benchmark summaries.
 
 ## Python API: bring your own generator
 

@@ -7,6 +7,7 @@ import subprocess
 import sys
 import unittest
 from unittest.mock import patch
+from types import SimpleNamespace
 import zipfile
 
 from bench_image.protocols import BENCHMARKS,FIELDS,validate_records,generation_samples
@@ -135,6 +136,25 @@ class CoreTests(unittest.TestCase):
             self.assertIn('random.Random("fixture-v1:',fixture.read_text())
             self.assertIn('bench_image.tiif_offline',fixture.read_text())
             self.assertNotIn('bench_image.tiif_offline',full.read_text())
+
+    def test_offline_client_preserves_messages_and_native_generation_defaults(self):
+        from bench_image.tiif_offline import OfflineClient
+        class FakeLLM:
+            def __init__(self,**kwargs):self.kwargs=kwargs
+            def get_default_sampling_params(self):return SimpleNamespace(repetition_penalty=1.05)
+            def chat(self,messages,*,sampling_params,use_tqdm):
+                self.seen=(messages,sampling_params,use_tqdm)
+                return [SimpleNamespace(outputs=[SimpleNamespace(finish_reason='stop',text='yes because visible')])]
+        messages=[dict(role='user',content='unchanged original question')]
+        with patch.dict(sys.modules,{'vllm':SimpleNamespace(LLM=FakeLLM)}),patch.dict(os.environ,{'TIIF_MODEL':'official-local-model','BENCH_SCORER_WORLD_SIZE':'8'}):
+            client=OfflineClient(api_key='local-open-model',base_url='unused')
+            output=client.chat.completions.create(model='judge',messages=messages,temperature=0,seed=0)
+            self.assertEqual(output.choices[0].message.content,'yes because visible')
+            self.assertIs(client.engine.seen[0],messages)
+            self.assertEqual(client.engine.seen[1].repetition_penalty,1.05)
+            self.assertEqual(client.engine.kwargs['tensor_parallel_size'],8)
+            self.assertFalse(client.engine.kwargs['enable_prefix_caching'])
+            self.assertEqual(os.environ['VLLM_ENABLE_V1_MULTIPROCESSING'],'0')
 
 
 if __name__=='__main__':unittest.main()
