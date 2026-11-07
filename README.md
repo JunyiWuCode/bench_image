@@ -297,9 +297,35 @@ to conceal them.
 
 ### Measured diagnostic reference
 
-The complete measured table and independent replay evidence are published
-alongside the final validated archive. Missing results are not filled from
-papers or full-run scores.
+Measured on the **106-image subset only**. The two independent final scoring
+passes agreed exactly in all 14 columns (maximum absolute difference 0).
+The predeclared acceptance tolerance remains 0.05, not a post-hoc widened
+threshold. Full machine-readable evidence, environment versions and retained
+earlier TIIF failures are in [`examples/validation.json`](examples/validation.json).
+
+| Metric | Fixed-image reference | Independent replay |
+| --- | ---: | ---: |
+| GenEval | 58.3333 | 58.3333 |
+| GenEval2 AM | 73.3393 | 73.3393 |
+| GenEval2 GM | 4.0821 | 4.0821 |
+| DPG-Bench | 94.1667 | 94.1667 |
+| TIIF Short (diagnostic offline/T=0) | 50.6900 | 50.6900 |
+| TIIF Long (diagnostic offline/T=0) | 54.1400 | 54.1400 |
+| CVTG WA | 50.0000 | 50.0000 |
+| CVTG NED | 85.1191 | 85.1191 |
+| CVTG CLIP | 81.5186 | 81.5186 |
+| LongText-EN | 49.1379 | 49.1379 |
+| OneIG-EN Overall | 39.3236 | 39.3236 |
+| Qwen-Image-Bench-EN Overall | 49.7074 | 49.7074 |
+| HPSv3 | 11.2752 | 11.2752 |
+| WISE Overall | 12.0000 | 12.0000 |
+
+Native generation checks additionally regenerated nine samples per Raw2Q
+family: all **18 PNGs matched the original evaluation pixels exactly**, with
+four actual transformer calls each. PUP generation succeeded on three raw
+prompts, but only one expansion matched the older cache exactly; this is why
+cross-model comparisons must reuse the same frozen captions. Neither this
+native smoke nor the fixed-image table is a newly generated full-suite score.
 
 ### Historical full-suite measurements (not the ZIP subset)
 

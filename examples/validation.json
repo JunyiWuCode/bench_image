@@ -1,0 +1,799 @@
+{
+  "integration_release": "JunyiWuCode/bench_image@v0.1.0",
+  "reference": {
+    "model": "kimi000/Flux1-Dev-4Step-Raw2Q-3000",
+    "model_revision": "2bcb04d9948e5d00ddd9972ff0318d62f4a33951",
+    "sampling_steps": 4,
+    "actual_nfe": 4,
+    "image_count": 106,
+    "counts": {
+      "geneval": 24,
+      "geneval2": 2,
+      "dpgbench": 8,
+      "tiif_short": 9,
+      "tiif_long": 9,
+      "cvtg": 2,
+      "longtext_en": 8,
+      "oneig_en": 24,
+      "qwen_image_bench_en": 2,
+      "hpsv3_official": 12,
+      "wise_verified": 6
+    },
+    "example_mode": "diagnostic subset, not full-benchmark quality",
+    "pixels": "Lossless RGB WebP storage; extraction restores identical RGB PNG pixels",
+    "prompt_field": "original prompt, no PUP",
+    "generation_hardware": "NVIDIA A100-SXM4-80GB",
+    "upstream_terms": "Official benchmark prompt/dataset/model terms continue to apply; see source lock and README.",
+    "purpose": "Reuse these same images to validate scorer consistency, or regenerate native samples separately."
+  },
+  "expected": {
+    "image_count": 106,
+    "headline_metrics": {
+      "GenEval": 58.333333333333336,
+      "GenEval2 AM": 73.33926444510654,
+      "GenEval2 GM": 4.082110463541272,
+      "DPG-Bench": 94.16666666666667,
+      "TIIF Short": 50.690000000000005,
+      "TIIF Long": 54.14,
+      "CVTG WA": 50.0,
+      "CVTG NED": 85.11906986958107,
+      "CVTG CLIP": 81.5185546875,
+      "LongText-EN": 49.137931034482754,
+      "OneIG-EN Overall": 39.32364521879289,
+      "Qwen-Image-Bench-EN Overall": 49.7074074074074,
+      "HPSv3": 11.275155862172445,
+      "WISE Overall": 12.0
+    },
+    "evaluation_mode": "fixture",
+    "tolerances": {
+      "GenEval": 0.05,
+      "GenEval2 AM": 0.05,
+      "GenEval2 GM": 0.05,
+      "DPG-Bench": 0.05,
+      "TIIF Short": 0.05,
+      "TIIF Long": 0.05,
+      "CVTG WA": 0.05,
+      "CVTG NED": 0.05,
+      "CVTG CLIP": 0.05,
+      "LongText-EN": 0.05,
+      "OneIG-EN Overall": 0.05,
+      "Qwen-Image-Bench-EN Overall": 0.05,
+      "HPSv3": 0.05,
+      "WISE Overall": 0.05
+    },
+    "note": "Measured on the provided subset only; unrelated to the 33468-image full-suite table."
+  },
+  "independent_repeat": {
+    "passed": true,
+    "metrics": {
+      "GenEval": {
+        "expected": 58.333333333333336,
+        "actual": 58.333333333333336,
+        "absolute_difference": 0.0,
+        "tolerance": 0.05,
+        "passed": true
+      },
+      "GenEval2 AM": {
+        "expected": 73.33926444510654,
+        "actual": 73.33926444510654,
+        "absolute_difference": 0.0,
+        "tolerance": 0.05,
+        "passed": true
+      },
+      "GenEval2 GM": {
+        "expected": 4.082110463541272,
+        "actual": 4.082110463541272,
+        "absolute_difference": 0.0,
+        "tolerance": 0.05,
+        "passed": true
+      },
+      "DPG-Bench": {
+        "expected": 94.16666666666667,
+        "actual": 94.16666666666667,
+        "absolute_difference": 0.0,
+        "tolerance": 0.05,
+        "passed": true
+      },
+      "TIIF Short": {
+        "expected": 50.690000000000005,
+        "actual": 50.690000000000005,
+        "absolute_difference": 0.0,
+        "tolerance": 0.05,
+        "passed": true
+      },
+      "TIIF Long": {
+        "expected": 54.14,
+        "actual": 54.14,
+        "absolute_difference": 0.0,
+        "tolerance": 0.05,
+        "passed": true
+      },
+      "CVTG WA": {
+        "expected": 50.0,
+        "actual": 50.0,
+        "absolute_difference": 0.0,
+        "tolerance": 0.05,
+        "passed": true
+      },
+      "CVTG NED": {
+        "expected": 85.11906986958107,
+        "actual": 85.11906986958107,
+        "absolute_difference": 0.0,
+        "tolerance": 0.05,
+        "passed": true
+      },
+      "CVTG CLIP": {
+        "expected": 81.5185546875,
+        "actual": 81.5185546875,
+        "absolute_difference": 0.0,
+        "tolerance": 0.05,
+        "passed": true
+      },
+      "LongText-EN": {
+        "expected": 49.137931034482754,
+        "actual": 49.137931034482754,
+        "absolute_difference": 0.0,
+        "tolerance": 0.05,
+        "passed": true
+      },
+      "OneIG-EN Overall": {
+        "expected": 39.32364521879289,
+        "actual": 39.32364521879289,
+        "absolute_difference": 0.0,
+        "tolerance": 0.05,
+        "passed": true
+      },
+      "Qwen-Image-Bench-EN Overall": {
+        "expected": 49.7074074074074,
+        "actual": 49.7074074074074,
+        "absolute_difference": 0.0,
+        "tolerance": 0.05,
+        "passed": true
+      },
+      "HPSv3": {
+        "expected": 11.275155862172445,
+        "actual": 11.275155862172445,
+        "absolute_difference": 0.0,
+        "tolerance": 0.05,
+        "passed": true
+      },
+      "WISE Overall": {
+        "expected": 12.0,
+        "actual": 12.0,
+        "absolute_difference": 0.0,
+        "tolerance": 0.05,
+        "passed": true
+      }
+    },
+    "note": "A matching fixture validates scoring consistency for these inputs; it is not a full-suite quality score or proof of universal correctness."
+  },
+  "native_generation": {
+    "flux1-raw2q": {
+      "images": 9,
+      "schedule": {
+        "final_step_size_scale": 0.3,
+        "scheduler_shift": 3.158192909689767,
+        "raw_times": [
+          1.0,
+          0.6969696879386902,
+          0.39393940567970276,
+          0.09090909361839294,
+          0.0
+        ],
+        "shifted_times": [
+          1.0,
+          0.8789909482002258,
+          0.6724345684051514,
+          0.24001722037792206,
+          0.0
+        ],
+        "model_dtype": "bfloat16",
+        "vae_dtype": "float32",
+        "integration_dtype": "float32",
+        "noise_generator_device": "cpu",
+        "noise_layout": "BCHW",
+        "noise_dtype": "bfloat16"
+      },
+      "comparisons": [
+        {
+          "artifact_id": "geneval:0:0",
+          "actual_nfe": 4,
+          "pixel_identical": true,
+          "mean_absolute_pixel_error": 0.0,
+          "image_std": 72.63580199103653
+        },
+        {
+          "artifact_id": "geneval:0:1",
+          "actual_nfe": 4,
+          "pixel_identical": true,
+          "mean_absolute_pixel_error": 0.0,
+          "image_std": 70.43988691889588
+        },
+        {
+          "artifact_id": "geneval:0:2",
+          "actual_nfe": 4,
+          "pixel_identical": true,
+          "mean_absolute_pixel_error": 0.0,
+          "image_std": 77.29562608243504
+        },
+        {
+          "artifact_id": "geneval:0:3",
+          "actual_nfe": 4,
+          "pixel_identical": true,
+          "mean_absolute_pixel_error": 0.0,
+          "image_std": 77.27254813212734
+        },
+        {
+          "artifact_id": "cvtg:0:0",
+          "actual_nfe": 4,
+          "pixel_identical": true,
+          "mean_absolute_pixel_error": 0.0,
+          "image_std": 73.13066633554352
+        },
+        {
+          "artifact_id": "longtext_en:0:0",
+          "actual_nfe": 4,
+          "pixel_identical": true,
+          "mean_absolute_pixel_error": 0.0,
+          "image_std": 83.59847336582797
+        },
+        {
+          "artifact_id": "longtext_en:0:1",
+          "actual_nfe": 4,
+          "pixel_identical": true,
+          "mean_absolute_pixel_error": 0.0,
+          "image_std": 78.39722799273338
+        },
+        {
+          "artifact_id": "longtext_en:0:2",
+          "actual_nfe": 4,
+          "pixel_identical": true,
+          "mean_absolute_pixel_error": 0.0,
+          "image_std": 78.92974608350431
+        },
+        {
+          "artifact_id": "longtext_en:0:3",
+          "actual_nfe": 4,
+          "pixel_identical": true,
+          "mean_absolute_pixel_error": 0.0,
+          "image_std": 75.8781070787353
+        }
+      ],
+      "hardware": "NVIDIA A100-SXM4-80GB",
+      "note": "Measured exact pixel equality on this stack, not a cross-platform guarantee"
+    },
+    "flux3-raw2q": {
+      "images": 9,
+      "schedule": {
+        "final_step_size_scale": 0.3,
+        "scheduler_shift": 6.93,
+        "raw_times": [
+          1.0,
+          0.6969696879386902,
+          0.39393940567970276,
+          0.09090909361839294,
+          0.0
+        ],
+        "shifted_times": [
+          1.0,
+          0.9409646987915039,
+          0.8183304667472839,
+          0.4093325436115265,
+          0.0
+        ],
+        "model_dtype": "bfloat16",
+        "vae_dtype": "float32",
+        "integration_dtype": "float32",
+        "noise_generator_device": "cpu",
+        "noise_layout": "packed_token_major",
+        "noise_dtype": "float32_rounded_to_bfloat16"
+      },
+      "comparisons": [
+        {
+          "artifact_id": "geneval:0:0",
+          "actual_nfe": 4,
+          "pixel_identical": true,
+          "mean_absolute_pixel_error": 0.0,
+          "image_std": 53.422179132507154
+        },
+        {
+          "artifact_id": "geneval:0:1",
+          "actual_nfe": 4,
+          "pixel_identical": true,
+          "mean_absolute_pixel_error": 0.0,
+          "image_std": 46.25191121998162
+        },
+        {
+          "artifact_id": "geneval:0:2",
+          "actual_nfe": 4,
+          "pixel_identical": true,
+          "mean_absolute_pixel_error": 0.0,
+          "image_std": 47.40278218225128
+        },
+        {
+          "artifact_id": "geneval:0:3",
+          "actual_nfe": 4,
+          "pixel_identical": true,
+          "mean_absolute_pixel_error": 0.0,
+          "image_std": 45.00082248811237
+        },
+        {
+          "artifact_id": "cvtg:0:0",
+          "actual_nfe": 4,
+          "pixel_identical": true,
+          "mean_absolute_pixel_error": 0.0,
+          "image_std": 54.00294267070439
+        },
+        {
+          "artifact_id": "longtext_en:0:0",
+          "actual_nfe": 4,
+          "pixel_identical": true,
+          "mean_absolute_pixel_error": 0.0,
+          "image_std": 62.70716436828236
+        },
+        {
+          "artifact_id": "longtext_en:0:1",
+          "actual_nfe": 4,
+          "pixel_identical": true,
+          "mean_absolute_pixel_error": 0.0,
+          "image_std": 65.70218015322254
+        },
+        {
+          "artifact_id": "longtext_en:0:2",
+          "actual_nfe": 4,
+          "pixel_identical": true,
+          "mean_absolute_pixel_error": 0.0,
+          "image_std": 59.77317517919392
+        },
+        {
+          "artifact_id": "longtext_en:0:3",
+          "actual_nfe": 4,
+          "pixel_identical": true,
+          "mean_absolute_pixel_error": 0.0,
+          "image_std": 60.97281336146302
+        }
+      ],
+      "hardware": "NVIDIA A100-SXM4-80GB",
+      "note": "Measured exact pixel equality on this stack, not a cross-platform guarantee"
+    }
+  },
+  "observed_environments": {
+    "GENEVAL_PYTHON": {
+      "python": "3.10.16",
+      "packages": {
+        "torch": "2.1.2+cu121",
+        "torchvision": "0.16.2+cu121",
+        "mmcv-full": "1.7.2",
+        "mmdet": "2.28.2",
+        "transformers": "5.9.0",
+        "numpy": "1.26.0",
+        "pandas": "2.3.3",
+        "setuptools": "80.10.2",
+        "open-clip-torch": "2.31.0",
+        "clip-benchmark": "1.6.1",
+        "Pillow": "12.2.0",
+        "tokenizers": "0.22.2",
+        "safetensors": "0.7.0",
+        "huggingface-hub": "1.15.0"
+      }
+    },
+    "GENEVAL2_PYTHON": {
+      "python": "3.10.20",
+      "packages": {
+        "torch": "2.11.0+cu128",
+        "torchvision": "0.26.0+cu128",
+        "transformers": "4.57.0",
+        "numpy": "1.26.4",
+        "pandas": "2.3.3",
+        "accelerate": "1.10.0",
+        "diffusers": "0.39.0",
+        "peft": "0.17.0",
+        "openai-clip": "1.0.1",
+        "setuptools": "78.1.0",
+        "Pillow": "12.2.0",
+        "tokenizers": "0.22.2",
+        "safetensors": "0.8.0",
+        "huggingface-hub": "0.36.2",
+        "sentencepiece": "0.2.2",
+        "protobuf": "5.29.6"
+      }
+    },
+    "DPGBENCH_PYTHON": {
+      "python": "3.10.20",
+      "packages": {
+        "torch": "2.11.0+cu128",
+        "torchvision": "0.26.0+cu128",
+        "transformers": "4.37.2",
+        "numpy": "2.2.6",
+        "pandas": "2.3.3",
+        "modelscope": "1.37.1",
+        "accelerate": "1.10.0",
+        "diffusers": "0.38.0",
+        "peft": "0.19.1",
+        "dreamsim": "0.2.1",
+        "setuptools": "69.5.1",
+        "open-clip-torch": "3.3.0",
+        "Pillow": "11.3.0",
+        "tokenizers": "0.15.2",
+        "safetensors": "0.8.0rc0",
+        "huggingface-hub": "0.36.2",
+        "sentencepiece": "0.2.1",
+        "protobuf": "5.29.6"
+      }
+    },
+    "CVTG_OCR_PYTHON": {
+      "python": "3.10.20",
+      "packages": {
+        "numpy": "2.2.6",
+        "pandas": "2.3.3",
+        "modelscope": "1.39.0",
+        "paddleocr": "3.3.3",
+        "paddlex": "3.3.13",
+        "paddlepaddle-gpu": "3.3.1",
+        "setuptools": "83.0.0",
+        "Pillow": "12.1.0",
+        "safetensors": "0.7.0",
+        "huggingface-hub": "1.26.0",
+        "protobuf": "6.33.4"
+      }
+    },
+    "CVTG_CLIP_PYTHON": {
+      "python": "3.10.20",
+      "packages": {
+        "torch": "2.4.1+cu121",
+        "torchvision": "0.19.1+cu121",
+        "numpy": "1.26.4",
+        "paddleocr": "2.9.1",
+        "paddlepaddle-gpu": "2.6.2",
+        "setuptools": "82.0.1",
+        "Pillow": "12.2.0",
+        "protobuf": "7.35.0"
+      }
+    },
+    "LONGTEXT_PYTHON": {
+      "python": "3.10.20",
+      "packages": {
+        "torch": "2.11.0+cu128",
+        "torchvision": "0.26.0+cu128",
+        "transformers": "4.52.0",
+        "numpy": "2.2.6",
+        "pandas": "2.3.3",
+        "accelerate": "1.10.0",
+        "diffusers": "0.38.0",
+        "peft": "0.19.1",
+        "dreamsim": "0.2.1",
+        "qwen-vl-utils": "0.0.14",
+        "setuptools": "70.2.0",
+        "open-clip-torch": "3.3.0",
+        "Pillow": "11.3.0",
+        "tokenizers": "0.21.4",
+        "safetensors": "0.8.0rc0",
+        "huggingface-hub": "0.36.2",
+        "sentencepiece": "0.2.1",
+        "protobuf": "5.29.6"
+      }
+    },
+    "ONEIG_PYTHON": {
+      "python": "3.10.20",
+      "packages": {
+        "torch": "2.6.0+cu118",
+        "torchvision": "0.21.0+cu118",
+        "transformers": "4.50.0",
+        "numpy": "2.2.6",
+        "pandas": "2.3.3",
+        "flash-attn": "2.7.3",
+        "accelerate": "1.4.0",
+        "peft": "0.17.1",
+        "dreamsim": "0.2.1",
+        "qwen-vl-utils": "0.0.14",
+        "openai-clip": "1.0.1",
+        "setuptools": "80.9.0",
+        "open-clip-torch": "3.3.0",
+        "Pillow": "12.3.0",
+        "tokenizers": "0.21.4",
+        "safetensors": "0.8.0",
+        "huggingface-hub": "0.36.2"
+      }
+    },
+    "HPSV3_PYTHON": {
+      "python": "3.10.20",
+      "packages": {
+        "torch": "2.6.0+cu118",
+        "torchvision": "0.21.0+cu118",
+        "transformers": "4.45.2",
+        "numpy": "2.2.6",
+        "pandas": "2.3.3",
+        "flash-attn": "2.7.3",
+        "accelerate": "1.8.0",
+        "diffusers": "0.39.0",
+        "peft": "0.10.0",
+        "trl": "0.8.6",
+        "qwen-vl-utils": "0.0.11",
+        "setuptools": "84.0.0",
+        "Pillow": "12.3.0",
+        "tokenizers": "0.20.3",
+        "safetensors": "0.8.0",
+        "huggingface-hub": "0.36.2",
+        "protobuf": "7.36.0"
+      }
+    },
+    "QJUDGER_PYTHON": {
+      "python": "3.11.15",
+      "packages": {
+        "torch": "2.11.0+cu128",
+        "torchvision": "0.26.0+cu128",
+        "transformers": "5.8.1",
+        "numpy": "2.4.6",
+        "pandas": "2.3.3",
+        "modelscope": "1.39.1",
+        "ms-swift": "4.2.1",
+        "accelerate": "1.14.0",
+        "peft": "0.19.1",
+        "trl": "0.29.1",
+        "qwen-vl-utils": "0.0.14",
+        "setuptools": "78.1.0",
+        "Pillow": "11.3.0",
+        "tokenizers": "0.22.2",
+        "safetensors": "0.8.0",
+        "huggingface-hub": "1.15.0",
+        "sentencepiece": "0.2.2",
+        "protobuf": "7.36.0"
+      }
+    },
+    "TIIF_VLLM_PYTHON": {
+      "python": "3.10.20",
+      "packages": {
+        "torch": "2.10.0",
+        "torchvision": "0.25.0",
+        "transformers": "4.57.6",
+        "numpy": "2.2.6",
+        "pandas": "2.3.3",
+        "vllm": "0.19.0",
+        "setuptools": "83.0.0",
+        "Pillow": "12.3.0",
+        "tokenizers": "0.22.2",
+        "safetensors": "0.8.0",
+        "huggingface-hub": "0.36.2",
+        "sentencepiece": "0.2.2",
+        "protobuf": "6.33.6"
+      }
+    },
+    "WISE_PYTHON": {
+      "python": "3.12.13",
+      "packages": {
+        "torch": "2.11.0",
+        "torchvision": "0.26.0",
+        "transformers": "5.13.0",
+        "numpy": "2.3.5",
+        "pandas": "3.0.5",
+        "vllm": "0.23.0",
+        "qwen-vl-utils": "0.0.14",
+        "setuptools": "80.10.2",
+        "Pillow": "12.3.0",
+        "tokenizers": "0.22.2",
+        "safetensors": "0.8.0",
+        "huggingface-hub": "1.19.0",
+        "sentencepiece": "0.2.2",
+        "protobuf": "7.35.1"
+      }
+    },
+    "GENERATION_PYTHON": {
+      "python": "3.11.15",
+      "packages": {
+        "torch": "2.9.1",
+        "torchvision": "0.24.1",
+        "transformers": "5.8.1",
+        "numpy": "2.4.6",
+        "pandas": "3.1.0",
+        "accelerate": "1.13.0",
+        "diffusers": "0.39.0",
+        "setuptools": "79.0.1",
+        "Pillow": "13.0.0",
+        "tokenizers": "0.22.2",
+        "safetensors": "0.8.0",
+        "huggingface-hub": "1.33.0"
+      }
+    }
+  },
+  "source_catalog": {
+    "git": {
+      "geneval": [
+        "https://github.com/djghosh13/geneval.git",
+        "af4902f24d3ca90ebbb446dd9891a59e0f82725f"
+      ],
+      "geneval2": [
+        "https://github.com/facebookresearch/GenEval2.git",
+        "a6e82d2289e8d418f27f0adee77908b07060eea3"
+      ],
+      "dpgbench": [
+        "https://github.com/Tencent-Hunyuan/GEAR.git",
+        "bf9665806e3c3666580467a42c8b04f56e4a33c8"
+      ],
+      "tiif": [
+        "https://github.com/A113N-W3I/TIIF-Bench.git",
+        "cca586f40f057c1590d819ae3807ea4e27620e84"
+      ],
+      "longtext_en": [
+        "https://github.com/X-Omni-Team/X-Omni.git",
+        "2b8237bb3789638c290eeda3e83ed81bd3652c3b"
+      ],
+      "oneig_en": [
+        "https://github.com/OneIG-Bench/OneIG-Benchmark.git",
+        "41b49831e79e6dde5323618c164da1c4cf0f699d"
+      ],
+      "hpsv3_scorer": [
+        "https://github.com/MizzenAI/HPSv3.git",
+        "bd0c5fcb5f587617b0169c07222ab78d01e2f3c2"
+      ],
+      "wise_verified": [
+        "https://github.com/PKU-YuanGroup/WISE.git",
+        "09b5539d64681bf11102fc5c87e63a387beaf71d"
+      ],
+      "qwen_image_bench": [
+        "https://github.com/QwenLM/Qwen-Image-Bench.git",
+        "8ab1fb47df2fba7b0cb046770a87f6323b98ecfc"
+      ],
+      "mmdetection": [
+        "https://github.com/open-mmlab/mmdetection.git",
+        "e9cae2d0787cd5c2fc6165a6061f92fa09e48fb1"
+      ]
+    },
+    "huggingface": {
+      "GENEVAL2_MODEL": {
+        "repo": "Qwen/Qwen3-VL-8B-Instruct",
+        "revision": "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b"
+      },
+      "TIIF_MODEL": {
+        "repo": "Qwen/Qwen2.5-VL-72B-Instruct",
+        "revision": "89c86200743eec961a297729e7990e8f2ddbc4c5"
+      },
+      "ONEIG_QWEN_MODEL": {
+        "repo": "Qwen/Qwen2.5-VL-7B-Instruct",
+        "revision": "cc594898137f460bfe9f0759e9844b3ce807cfb5"
+      },
+      "ONEIG_LLM2CLIP_MODEL": {
+        "repo": "microsoft/LLM2CLIP-Openai-L-14-336",
+        "revision": "92512331f393a003c3d98404677f991c188162c9"
+      },
+      "ONEIG_LLM2CLIP_LLM": {
+        "repo": "microsoft/LLM2CLIP-Llama-3-8B-Instruct-CC-Finetuned",
+        "revision": "97f7d164a1eb89a79e344b21c7a1be7eee265d2e"
+      },
+      "ONEIG_LLM2VEC_CODE": {
+        "repo": "McGill-NLP/LLM2Vec-Meta-Llama-3-8B-Instruct-mntp",
+        "revision": "31474e395ada192e8ed1586db6be79fb3b70c9c0",
+        "file": "modeling_llama_encoder.py"
+      },
+      "ONEIG_CLIP_MODEL": {
+        "repo": "openai/clip-vit-large-patch14-336",
+        "revision": "ce19dc912ca5cd21c8a653c79e251e808ccabcd1"
+      },
+      "ONEIG_STYLE_MODEL": {
+        "repo": "xingpng/OneIG-StyleEncoder",
+        "revision": "9e8104621cbc8c8f04ce663639ffbec63e0a9693"
+      },
+      "QJUDGER_MODEL": {
+        "repo": "Qwen/Qwen-Image-Bench",
+        "revision": "1b77ff83564ac4e4e8140769eacff7ff73f35f3c"
+      },
+      "HPSV3_BASE_MODEL": {
+        "repo": "Qwen/Qwen2-VL-7B-Instruct",
+        "revision": "eed13092ef92e448dd6875b2a00151bd3f7db0ac"
+      },
+      "HPSV3_CHECKPOINT": {
+        "repo": "MizzenAI/HPSv3",
+        "revision": "4f81e3e09edd82fe3c5f636444c721b592a735ca",
+        "file": "HPSv3.safetensors"
+      },
+      "WISE_MODEL": {
+        "repo": "Qwen/Qwen3.5-35B-A3B",
+        "revision": "59d61f3ce65a6d9863b86d2e96597125219dc754"
+      },
+      "PADDLEOCR_DET_MODEL_DIR": {
+        "repo": "PaddlePaddle/PP-OCRv5_server_det",
+        "revision": "ca867c897ecbca8873081573a802ad70d499cb94"
+      },
+      "PADDLEOCR_REC_MODEL_DIR": {
+        "repo": "PaddlePaddle/en_PP-OCRv5_mobile_rec",
+        "revision": "267c36e24c331595590fe7bd72bde2436fd286f2"
+      }
+    },
+    "optional_huggingface": {
+      "FLUX3_PUP_MODEL": {
+        "repo": "black-forest-labs/flux-3-image-klein-pup",
+        "revision": "3f3edb52b2c55de0d49feab28598b68f7f8e4830"
+      }
+    },
+    "datasets": {
+      "dpgbench_questions": {
+        "repo": "Jialuo21/DPG-Bench",
+        "revision": "16ab39cdc630e51072efaeeec24c16b2bb39a849",
+        "file": "data/test-00000-of-00001.parquet"
+      },
+      "hpsv3_official": {
+        "repo": "MizzenAI/HPDv3",
+        "revision": "5ac4b5b5f2ef42c4613dec612473170b131552db",
+        "allow_patterns": [
+          "benchmark/*.json"
+        ]
+      }
+    },
+    "http": {
+      "GENEVAL_MODEL_PATH": {
+        "url": "https://download.openmmlab.com/mmdetection/v2.0/mask2former/mask2former_swin-s-p4-w7-224_lsj_8x2_50e_coco/mask2former_swin-s-p4-w7-224_lsj_8x2_50e_coco_20220504_001756-743b7d99.pth",
+        "file": "mask2former/mask2former_swin-s-p4-w7-224_lsj_8x2_50e_coco_20220504_001756-743b7d99.pth",
+        "return_directory": true
+      },
+      "BENCH_CLIP_MODEL_PATH": {
+        "url": "https://openaipublic.azureedge.net/clip/models/b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836/ViT-L-14.pt",
+        "file": "clip/ViT-L-14.pt"
+      }
+    },
+    "modelscope": {
+      "DPGBENCH_MPLUG_MODEL": {
+        "repo": "damo/mplug_visual-question-answering_coco_large_en",
+        "revision": "master",
+        "note": "Official legacy ModelScope distribution has no immutable revision recorded by the original evaluation. Download receipts retain upstream metadata; do not claim a content-addressed lock."
+      }
+    },
+    "google_drive": {
+      "ONEIG_CSD_MODEL": {
+        "id": "1FX0xs8p-C7Ob-h5Y4cUhTeOepHzXv_46",
+        "file": "oneig_csd/checkpoint.pth",
+        "note": "Original OneIG README download; upstream exposes a file ID, not an immutable model revision."
+      }
+    }
+  },
+  "fresh_controller_install": true,
+  "fresh_public_sources": true,
+  "all_fresh_ml_environments_installed": false,
+  "pup_backend": {
+    "complete": true,
+    "prompts": 3,
+    "batch_size": 1,
+    "identical_to_recorded_cache": 1,
+    "model": "black-forest-labs/flux-3-image-klein-pup",
+    "revision": "3f3edb52b2c55de0d49feab28598b68f7f8e4830",
+    "note": "Greedy backend succeeds; reuse frozen captions because batch/engine/hardware can change expansions"
+  },
+  "tiif_diagnostic_protocol": {
+    "temperature": 0,
+    "request_seed": 0,
+    "transport": "offline_vllm",
+    "deterministic_scheduling": true,
+    "max_num_seqs": 1,
+    "enforce_eager": true,
+    "enable_prefix_caching": false,
+    "enable_chunked_prefill": false,
+    "template_choice": "deterministic per-question selection among original three templates",
+    "full_protocol_unchanged": true,
+    "failed_earlier_replays": {
+      "tiif_short_official_stochastic": {
+        "run": {
+          "tiif_short": 59.86,
+          "tiif_long": 48.49
+        },
+        "repeat": {
+          "tiif_short": 49.86,
+          "tiif_long": 55.53
+        }
+      },
+      "tiif_short_seeded_online": {
+        "run": {
+          "tiif_short": 50.690000000000005,
+          "tiif_long": 54.14
+        },
+        "repeat": {
+          "tiif_short": 49.58,
+          "tiif_long": 51.92
+        }
+      }
+    }
+  },
+  "scorer_weights": "Explicit existing official caches, reused read-only; see README for mutable legacy distributions",
+  "model_revisions": {
+    "flux1-raw2q": "2bcb04d9948e5d00ddd9972ff0318d62f4a33951",
+    "flux3-raw2q": "781ff93f92b84397ee0e62e02f052bce99549759"
+  },
+  "raw_responses": "Generated in each scorer run; reference ZIP contains fixed images and numeric expectations, not full-suite scores"
+}
