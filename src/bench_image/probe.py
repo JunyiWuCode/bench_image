@@ -6,7 +6,8 @@ import sys
 
 PACKAGES=('torch','torchvision','mmcv-full','mmdet','transformers','numpy','pandas',
           'modelscope','paddleocr','paddlex','paddlepaddle-gpu','vllm','ms-swift','flash-attn',
-          'accelerate','diffusers','peft','trl','dreamsim','qwen-vl-utils','openai-clip','setuptools')
+          'accelerate','diffusers','peft','trl','dreamsim','qwen-vl-utils','openai-clip','setuptools',
+          'open-clip-torch','clip-benchmark')
 
 
 def probe():
