@@ -189,6 +189,7 @@ def setup(root=None,*,dry_run=False,only=None):
         if entry['recipe'].get('compile_mmcv'):
             if not shutil.which('nvcc'):raise RuntimeError('GenEval MMCV build requires nvcc on an allocated GPU node')
             env['FORCE_CUDA']='1'
+            env['MAX_JOBS']=os.environ.get('MAX_JOBS',os.environ.get('SLURM_CPUS_PER_TASK','4'))
         for command in commands:_command(command,env=env)
         marker.write_text(json.dumps(entry['recipe'],indent=2)+'\n')
     if only:return dict(environments_installed=[entry['name'] for entry in plan],complete=False,

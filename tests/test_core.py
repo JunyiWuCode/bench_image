@@ -3,6 +3,8 @@ import io
 import os
 from pathlib import Path
 import tempfile
+import subprocess
+import sys
 import unittest
 from unittest.mock import patch
 import zipfile
@@ -12,7 +14,7 @@ from bench_image.generation import _lock,_native_backend
 from bench_image.scoring import _device_tokens,_snapshot_runner,_compatible_configuration
 from bench_image.fixtures import extract_example,verify_reference
 from bench_image.setup import environment_plan
-from bench_image.config import WORKERS
+from bench_image.config import WORKERS,TOOLS
 from PIL import Image,ImageChops
 
 
@@ -118,6 +120,19 @@ class CoreTests(unittest.TestCase):
         self.assertIn('paddleocr==3.3.3',ocr['recipe']['packages'])
         self.assertEqual(ocr['recipe']['paddle'],'3.3.1')
         for item in plan:self.assertTrue(item['prefix'].startswith(d))
+
+    def test_tiif_full_and_diagnostic_modes_are_distinct(self):
+        source='line_indices = sample_idx[attr_type]\ntemperature=1.0 # You may set it to 0 if you require stricter reproducibility.\nprompt_template = random.choice([raw_prompt, raw_prompt_1, raw_prompt_2])\n'
+        with tempfile.TemporaryDirectory() as d:
+            original=Path(d)/'source.py';full=Path(d)/'full.py';fixture=Path(d)/'fixture.py'
+            original.write_text(source)
+            command=[sys.executable,str(TOOLS/'prepare_tiif_pinned_evaluator.py'),'--source',str(original)]
+            subprocess.run(command+['--output',str(full)],check=True,capture_output=True)
+            subprocess.run(command+['--output',str(fixture),'--deterministic-fixture'],check=True,capture_output=True)
+            self.assertIn('temperature=1.0',full.read_text())
+            self.assertIn('random.choice(',full.read_text())
+            self.assertIn('temperature=0.0, seed=0',fixture.read_text())
+            self.assertIn('random.Random("fixture-v1:',fixture.read_text())
 
 
 if __name__=='__main__':unittest.main()
